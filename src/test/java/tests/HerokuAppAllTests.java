@@ -19,7 +19,12 @@ public class HerokuAppAllTests {
         HerokuAppBaseURL.SPEC.pathParams("pp1", "auth");
         HerokuAppTokenBody body = new HerokuAppTokenBody("admin", "password123");
 
-        Response response = given().spec(HerokuAppBaseURL.SPEC).contentType(ContentType.JSON).when().body(body).post("/{pp1}");
+        Response response = given()
+                            .spec(HerokuAppBaseURL.SPEC)
+                            .contentType(ContentType.JSON)
+                            .when()
+                            .body(body)
+                            .post("/{pp1}");
         response.prettyPrint();
 
         HerokuAppExpectedTokenBody resBody = response.as(HerokuAppExpectedTokenBody.class);
@@ -85,11 +90,11 @@ public class HerokuAppAllTests {
         HerokuAppBaseURL.SPEC.pathParams("pp1", "booking", "pp2", bookingId);
 
         Response response = given()
-                .spec(HerokuAppBaseURL.SPEC)
-                .contentType(ContentType.JSON)
-                .header("Cookie", "token=" + token)
-                .when()
-                .delete("/{pp1}/{pp2}");
+                            .spec(HerokuAppBaseURL.SPEC)
+                            .contentType(ContentType.JSON)
+                            .header("Cookie", "token=" + token)
+                            .when()
+                            .delete("/{pp1}/{pp2}");
         response.prettyPrint();
 
         Assert.assertEquals(response.getStatusCode(), 201);
