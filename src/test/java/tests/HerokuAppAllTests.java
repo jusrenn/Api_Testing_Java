@@ -16,10 +16,10 @@ public class HerokuAppAllTests {
 
     @Test(priority = 1)
     public void createToken() {
-        HerokuAppBaseURL.spec.pathParams("pp1", "auth");
+        HerokuAppBaseURL.SPEC.pathParams("pp1", "auth");
         HerokuAppTokenBody body = new HerokuAppTokenBody("admin", "password123");
 
-        Response response = given().spec(HerokuAppBaseURL.spec).contentType(ContentType.JSON).when().body(body).post("/{pp1}");
+        Response response = given().spec(HerokuAppBaseURL.SPEC).contentType(ContentType.JSON).when().body(body).post("/{pp1}");
         response.prettyPrint();
 
         HerokuAppExpectedTokenBody resBody = response.as(HerokuAppExpectedTokenBody.class);
@@ -30,12 +30,12 @@ public class HerokuAppAllTests {
 
     @Test(priority = 2)
     public void createBooking() {
-        HerokuAppBaseURL.spec.pathParams("pp1", "booking");
+        HerokuAppBaseURL.SPEC.pathParams("pp1", "booking");
         HerokuAppCreateBookingInner inner = new HerokuAppCreateBookingInner("2023-06-18", "2023-07-18");
         HerokuAppCreateBookingBody body = new HerokuAppCreateBookingBody("Yusuf", "Soyisim", 250, true, inner, "Breakfast");
 
         Response response = given()
-                            .spec(HerokuAppBaseURL.spec)
+                            .spec(HerokuAppBaseURL.SPEC)
                             .contentType(ContentType.JSON)
                             .when().body(body)
                             .post("/{pp1}");
@@ -55,12 +55,12 @@ public class HerokuAppAllTests {
 
     @Test(priority = 3)
     public void updateBooking() {
-        HerokuAppBaseURL.spec.pathParams("pp1", "booking", "pp2", bookingId);
+        HerokuAppBaseURL.SPEC.pathParams("pp1", "booking", "pp2", bookingId);
         HerokuAppCreateBookingInner inner = new HerokuAppCreateBookingInner("2023-06-18", "2023-07-18");
         HerokuAppCreateBookingBody body = new HerokuAppCreateBookingBody("uusi nimi", "uusi sukunimi", 350, false, inner, "Breakfast");
 
         Response response = given()
-                            .spec(HerokuAppBaseURL.spec)
+                            .spec(HerokuAppBaseURL.SPEC)
                             .contentType(ContentType.JSON)
                             .header("Accept", ContentType.JSON)
                             .header("Cookie", "token=" + token)
@@ -82,10 +82,10 @@ public class HerokuAppAllTests {
 
     @Test(priority = 4)
     public void deleteBooking() {
-        HerokuAppBaseURL.spec.pathParams("pp1", "booking", "pp2", bookingId);
+        HerokuAppBaseURL.SPEC.pathParams("pp1", "booking", "pp2", bookingId);
 
         Response response = given()
-                .spec(HerokuAppBaseURL.spec)
+                .spec(HerokuAppBaseURL.SPEC)
                 .contentType(ContentType.JSON)
                 .header("Cookie", "token=" + token)
                 .when()

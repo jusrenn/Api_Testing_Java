@@ -5,9 +5,9 @@ import io.restassured.specification.RequestSpecification;
 
 public class HerokuAppBaseURL {
 
-    public static RequestSpecification spec;
+    public static RequestSpecification SPEC;
 
     static {
-        spec = new RequestSpecBuilder().setBaseUri("https://restful-booker.herokuapp.com").build();
+        SPEC = new RequestSpecBuilder().setBaseUri("https://restful-booker.herokuapp.com").build();
     }
 }
