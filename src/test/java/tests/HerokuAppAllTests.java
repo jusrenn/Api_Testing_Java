@@ -84,7 +84,12 @@ public class HerokuAppAllTests {
     public void deleteBooking() {
         HerokuAppBaseURL.spec.pathParams("pp1", "booking", "pp2", bookingId);
 
-        Response response = given().spec(HerokuAppBaseURL.spec).contentType(ContentType.JSON).header("Cookie", "token="+token).when().delete("/{pp1}/{pp2}");
+        Response response = given()
+                .spec(HerokuAppBaseURL.spec)
+                .contentType(ContentType.JSON)
+                .header("Cookie", "token=" + token)
+                .when()
+                .delete("/{pp1}/{pp2}");
         response.prettyPrint();
 
         Assert.assertEquals(response.getStatusCode(), 201);
